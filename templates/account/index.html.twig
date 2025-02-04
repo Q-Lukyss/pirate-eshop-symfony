@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <main class="p-2">
+        <h1 class="m-3">Mon Compte</h1>
+        <div class="container">
+            <a class="btn btn-outline-primary" href="{{ path('app_modify_password') }}">Modifier Mot de Passe</a>
+        </div>
+
+    </main>
+{% endblock %}

@@ -1,0 +1,12 @@
+{# templates/catgory/_category.html.twig #}
+{% for category in categories %}
+    <li>
+        <a class="dropdown-item" href="{{ path('app_category', {slug: category.slug}) }}">
+            {{ category.name }}
+        </a>
+    </li>
+{% else %}
+    <li>
+        <span class="dropdown-item">Aucune catégorie trouvée</span>
+    </li>
+{% endfor %}

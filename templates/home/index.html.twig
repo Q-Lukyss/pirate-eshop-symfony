@@ -1,0 +1,195 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Marché Noir Pirate{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Carousel */
+        .carousel-item img {
+            filter: brightness(50%);
+            object-fit: cover;
+            width: 100%;
+            height: 100vh;
+        }
+        .carousel-caption {
+            bottom: 20%;
+        }
+        /* Redimensionnement des images hero pour les featurettes */
+        .featurette-image {
+            width: 600px;
+            height: 600px;
+            object-fit: contain;
+        }
+        .featurette-heading {
+            margin-top: 0 !important;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <!-- Carousel -->
+        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <img src="{{ asset('assets/img/carousel1.webp') }}" alt="Vue mer 1">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1>Bienvenue à bord, moussaillons !</h1>
+                            <p class="opacity-75">
+                                Embarquez pour une aventure hors du commun dans notre repaire secret des pirates. Ici, le butin n'est jamais loin.
+                            </p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#">Rejoignez l'équipage</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/img/carousel2.webp') }}" alt="Vue mer 2">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Le trésor des mers vous attend</h1>
+                            <p>
+                                Explorez des contrées inexplorées et découvrez des merveilles cachées dans les recoins les plus sombres de l'océan.
+                            </p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#">Voir les trésors</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <img src="{{ asset('assets/img/carousel3.webp') }}" alt="Vue mer 3">
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1>Cap sur l'inconnu !</h1>
+                            <p>
+                                Que vous soyez corsaire aguerri ou simple flibustier, notre marché noir regorge de merveilles et de mystères à découvrir.
+                            </p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#">Explorer maintenant</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
+        </div>
+
+        <!-- Section Marketing -->
+        <div class="container marketing">
+            <!-- Trois colonnes de texte -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="{{ asset('assets/img/circle1.webp') }}" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="Capitaine Intrépide">
+                    <h2 class="fw-normal">Capitaine Intrépide</h2>
+                    <p>
+                        Dirigez votre navire et imposez votre loi sur les mers. Ici, seuls les plus audacieux osent s'aventurer.
+                    </p>
+                    <p>
+                        <a class="btn btn-secondary" href="#">Prendre le commandement &raquo;</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <img src="{{ asset('assets/img/circle2.webp') }}" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="Marchand de Trésors">
+                    <h2 class="fw-normal">Marchand de Trésors</h2>
+                    <p>
+                        Vendez et échangez des objets rares venus des quatre coins du globe. Le marché noir pirate regorge de pépites pour les vrais connaisseurs.
+                    </p>
+                    <p>
+                        <a class="btn btn-secondary" href="#">Découvrir les offres &raquo;</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <img src="{{ asset('assets/img/circle3.webp') }}" class="bd-placeholder-img rounded-circle" width="140" height="140" alt="Chasseur de Butins">
+                    <h2 class="fw-normal">Chasseur de Butins</h2>
+                    <p>
+                        Partez en expédition pour dénicher les trésors oubliés et les reliques perdues des temps anciens. Le frisson de l'aventure n'a jamais été aussi proche.
+                    </p>
+                    <p>
+                        <a class="btn btn-secondary" href="#">Partir à l'aventure &raquo;</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+
+            <!-- START THE FEATURETTES -->
+            <hr class="featurette-divider my-12" />
+
+            <!-- Featurette 1 -->
+            <div class="row featurette align-items-start">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading fw-normal lh-1">
+                        Les légendes des sept mers,
+                        <span class="text-body-secondary">transmises de génération en génération.</span>
+                    </h2>
+                    <p class="lead">
+                        Découvrez les récits épiques de corsaires et de flibustiers qui ont marqué l'histoire du grand large. Ici, chaque objet raconte une histoire de bravoure et de mystère.
+                    </p>
+                </div>
+                <div class="col-md-5 d-flex justify-content-center">
+                    <img src="{{ asset('assets/img/hero1.webp') }}" class="featurette-image img-fluid" alt="Héros 1">
+                </div>
+            </div>
+
+            <hr class="featurette-divider my-12" />
+
+            <!-- Featurette 2 -->
+            <div class="row featurette align-items-start">
+                <div class="col-md-7 order-md-2">
+                    <h2 class="featurette-heading fw-normal lh-1">
+                        Le code des pirates est sacré,
+                        <span class="text-body-secondary">et ici, il guide chacun de nos pas.</span>
+                    </h2>
+                    <p class="lead">
+                        Plongez dans un univers où la loyauté se forge dans le feu des batailles navales et où la ruse est la clé du succès. Rejoignez la confrérie des pirates et faites vibrer les océans.
+                    </p>
+                </div>
+                <div class="col-md-5 order-md-1 d-flex justify-content-center">
+                    <img src="{{ asset('assets/img/hero2.webp') }}" class="featurette-image img-fluid" alt="Héros 2">
+                </div>
+            </div>
+
+            <hr class="featurette-divider my-12" />
+
+            <!-- Featurette 3 -->
+            <div class="row featurette align-items-start">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading fw-normal lh-1">
+                        L'horizon regorge de mystères,
+                        <span class="text-body-secondary">prêts à être découverts par les âmes courageuses.</span>
+                    </h2>
+                    <p class="lead">
+                        Que vous soyez à la recherche d’un artefact légendaire ou d’un petit trésor insolite, notre marché noir pirate est la destination idéale pour assouvir votre soif d’aventure.
+                    </p>
+                </div>
+                <div class="col-md-5 d-flex justify-content-center">
+                    <img src="{{ asset('assets/img/hero3.webp') }}" class="featurette-image img-fluid" alt="Héros 3">
+                </div>
+            </div>
+
+            <hr class="featurette-divider my-12" />
+            <!-- /END THE FEATURETTES -->
+        </div>
+        <!-- /.container -->
+    </main>
+{% endblock %}
