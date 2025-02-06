@@ -5,6 +5,7 @@
 {% block body %}
 
     <div class="container my-5">
+        <p><a href="{{ path('app_category', {slug: product.category.slug}) }}">{{ product.category.name }}</a> > <a href="{{ path('app_product', {slug: product.slug}) }}">{{ product.name }}</a></p>
         <div class="row align-items-center">
 
             <!-- Image du produit -->
