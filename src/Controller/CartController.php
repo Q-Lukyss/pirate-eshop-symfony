@@ -32,6 +32,8 @@ class CartController extends AbstractController
         );
 
         // Rediriger
+        // plutot que 2 routes add et increment on pourrait avoir REquest de htttp foundation
+        // Pour redirger vers l'url d'avant
         return $this->redirectToRoute('app_product', ['slug' => $product->getSlug()]);
     }
 
