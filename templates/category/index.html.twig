@@ -24,7 +24,7 @@
                                 <p class="card-text fw-bold">{{ product.getPriceWt() }}
                                     Piece(s) d'Or
                                 </p>
-                                <a href="#" class="btn btn-primary mt-auto">Ajouter au Panier</a>
+                                <a href="{{ path('app_product', {slug: product.slug}) }}" class="btn btn-primary mt-auto">Afficher</a>
                             </div>
                         </div>
                     </div>

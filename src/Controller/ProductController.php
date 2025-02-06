@@ -13,9 +13,8 @@ class ProductController extends AbstractController
     public function index(string $slug, ProductRepository $productRepository): Response
     {
         $product = $productRepository->findOneBy(['slug' => $slug]);
-        dd($product);
         return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
+            'product' => $product,
         ]);
     }
 }
