@@ -7,43 +7,60 @@
 
         <h1 class="mb-4">Mon panier</h1>
 
+        <a href="{{ path('app_cart_clear') }}" class="btn btn-outline-danger">Vider le panier</a>
+
         {% if cart is not empty %}
-            {# On calcule le total du panier #}
+            {# Calcul du total du panier #}
             {% set total = 0 %}
             {% for product in cart %}
                 {% set total = total + (product.object.priceWt() * product.qty) %}
             {% endfor %}
 
             <div class="row">
-                {# Colonne de gauche : le tableau des produits #}
+                {# Colonne de gauche : liste des produits #}
                 <div class="col-md-8">
-                    <table class="table table-bordered table-hover align-middle">
-                        <thead class="table-light">
-                        <tr>
-                            <th scope="col" class="text-center">Image</th>
-                            <th scope="col">Produit</th>
-                            <th scope="col" class="text-center">Quantité</th>
-                            <th scope="col" class="text-end">Prix unitaire</th>
-                            <th scope="col" class="text-end">Prix total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for product in cart %}
-                            <tr>
-                                <td class="text-center" style="width: 100px;">
+                    {% for product in cart %}
+                        <div class="card mb-3">
+                            <div class="row g-0 align-items-center">
+                                <div class="col-auto">
                                     <img src="{{ asset('upload/' ~ product.object.illustration) }}"
                                          alt="{{ product.object.name }}"
-                                         class="img-thumbnail"
-                                         style="max-width: 80px;">
-                                </td>
-                                <td>{{ product.object.name }}</td>
-                                <td class="text-center">{{ product.qty }}</td>
-                                <td class="text-end">{{ product.object.priceWt()|price }}</td>
-                                <td class="text-end">{{ (product.object.priceWt() * product.qty)|price }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                                         class="img-fluid rounded-start"
+                                         style="width:120px; height:auto;">
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-2">{{ product.object.name }}</h5>
+
+                                        {# Section quantité avec boutons +/- #}
+                                        <div class="d-flex align-items-center mb-2">
+                                            <a href="{{ path('app_cart_decrement', { id: product.object.id }) }}"
+                                               class="btn btn-outline-secondary btn-sm me-2">
+                                                -
+                                            </a>
+                                            <span class="fw-bold">{{ product.qty }}</span>
+                                            <a href="{{ path('app_cart_increment', { id: product.object.id }) }}"
+                                               class="btn btn-outline-secondary btn-sm ms-2">
+                                                +
+                                            </a>
+                                        </div>
+
+                                        <p class="mb-1">Prix unitaire :
+                                            <strong>{{ product.object.priceWt()|price }}</strong>
+                                        </p>
+                                        <p class="mb-1">Total :
+                                            <strong>{{ (product.object.priceWt() * product.qty)|price }}</strong>
+                                        </p>
+                                        {# Bouton pour supprimer l'article du panier #}
+                                        <a href="{{ path('app_cart_remove', { id: product.object.id }) }}"
+                                           class="btn btn-danger btn-sm mt-2">
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
 
                 {# Colonne de droite : récapitulatif du total #}
@@ -59,7 +76,7 @@
                                 {{ total|price }}
                             </span>
                             </p>
-                            {# Exemple si vous avez des frais de livraison ou autres #}
+                            {# Si vous avez des frais de livraison ou autres #}
                             {#
                             <p class="card-text">
                                 Frais de livraison :
@@ -86,5 +103,6 @@
                 Votre panier est vide.
             </div>
         {% endif %}
+
     </div>
 {% endblock %}

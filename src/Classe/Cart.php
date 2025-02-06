@@ -54,24 +54,39 @@ class Cart
 
     public function decrement_quantity($product): void
     {
-        $cart = $this->requestStack->getSession()->get('cart');
+        $cart = $this->getCart();
 
-        if ($cart[$product->getId()['qty']] <= 1) {
+        // Vérifie d'abord si le produit est dans le panier
+        if (isset($cart[$product->getId()])) {
+            // Si la quantité actuelle est <= 1, on supprime carrément l'article
+            if ($cart[$product->getId()]['qty'] <= 1) {
+                $this->remove($product);
+            } else {
+                // Sinon on décrémente simplement la quantité
+                $cart[$product->getId()] = [
+                    'object' => $product,
+                    'qty'    => $cart[$product->getId()]['qty'] - 1
+                ];
 
-            $this->remove($product);
+                $this->requestStack->getSession()->set('cart', $cart);
+            }
         }
-        else {
-            $cart[$product->getId()] = [
-                'object' => $product,
-                'qty' =>$cart[$product->getId()]['qty'] - 1
-            ];
-        }
-          $this->requestStack->getSession()->set('cart', $cart);
-
     }
 
     public function remove($product): void
     {
+        $cart = $this->getCart();
 
+        // Si le produit existe dans le panier, on le supprime
+        if (isset($cart[$product->getId()])) {
+            unset($cart[$product->getId()]);
+        }
+
+        $this->requestStack->getSession()->set('cart', $cart);
+    }
+
+    public function clear(): void
+    {
+        $this->requestStack->getSession()->remove('cart');
     }
 }
