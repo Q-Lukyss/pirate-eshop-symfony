@@ -32,6 +32,12 @@ class ProductCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        // on vérifie si on est en edition si edition on required pas l'image sinon on la require
+        $required = true;
+        if ($pageName=='edit'){
+            $required = false;
+        }
+
         return [
             TextField::new('name')->setLabel('Nom')->setHelp('Nom du Produit'),
             SlugField::new('slug')->setLabel('Url')->setTargetFieldName('name'),
@@ -39,7 +45,8 @@ class ProductCrudController extends AbstractCrudController
             ImageField::new('illustration')->setLabel('Image')
                 ->setHelp('Image')
                 ->setUploadDir('public\upload')
-                ->setBasePath('upload'),
+                ->setBasePath('upload')
+                ->setRequired($required),
             NumberField::new('price')->setLabel('Prix'),
             ChoiceField::new('tva')->setChoices([
                 '5,5%' => '5.5',

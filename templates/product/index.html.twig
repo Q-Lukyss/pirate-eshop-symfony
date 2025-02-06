@@ -23,20 +23,20 @@
                 <!-- Prix -->
                 <div class="mt-4">
                     <p class="fs-5 mb-2"><strong>Prix HT :</strong>
-                        <span class="text-dark fw-semibold">{{ product.price | price }}</span> pièces d'or
+                        <span class="text-dark fw-semibold">{{ product.price | price }}</span>
                     </p>
                     <p class="fs-5 mb-2"><strong>TVA :</strong>
                         <span class="text-dark fw-semibold">{{ product.tva }}%</span>
                     </p>
                     <p class="fs-3 fw-bold text-success mt-2">
                         <strong>Prix TTC :</strong>
-                        {{ product.getPriceWt() | price }} pièces d'or
+                        {{ product.getPriceWt() | price }}
                     </p>
                 </div>
 
                 <!-- Bouton Ajouter au panier -->
                 <div class="mt-4">
-                    <a href="#" class="btn btn-lg btn-primary px-4 py-2 shadow-sm">
+                    <a href="{{ path('app_cart_add', {id: product.id}) }}" class="btn btn-lg btn-primary px-4 py-2 shadow-sm">
                         <i class="fas fa-shopping-cart"></i> Ajouter au panier
                     </a>
                 </div>

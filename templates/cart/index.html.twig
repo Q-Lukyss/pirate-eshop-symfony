@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+
+        <h1 class="mb-4">Mon panier</h1>
+
+        {% if cart is not empty %}
+            {# On calcule le total du panier #}
+            {% set total = 0 %}
+            {% for product in cart %}
+                {% set total = total + (product.object.priceWt() * product.qty) %}
+            {% endfor %}
+
+            <div class="row">
+                {# Colonne de gauche : le tableau des produits #}
+                <div class="col-md-8">
+                    <table class="table table-bordered table-hover align-middle">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col" class="text-center">Image</th>
+                            <th scope="col">Produit</th>
+                            <th scope="col" class="text-center">Quantité</th>
+                            <th scope="col" class="text-end">Prix unitaire</th>
+                            <th scope="col" class="text-end">Prix total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in cart %}
+                            <tr>
+                                <td class="text-center" style="width: 100px;">
+                                    <img src="{{ asset('upload/' ~ product.object.illustration) }}"
+                                         alt="{{ product.object.name }}"
+                                         class="img-thumbnail"
+                                         style="max-width: 80px;">
+                                </td>
+                                <td>{{ product.object.name }}</td>
+                                <td class="text-center">{{ product.qty }}</td>
+                                <td class="text-end">{{ product.object.priceWt()|price }}</td>
+                                <td class="text-end">{{ (product.object.priceWt() * product.qty)|price }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {# Colonne de droite : récapitulatif du total #}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header fw-bold">
+                            Récapitulatif
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Sous-total :
+                                <span class="fw-bold float-end">
+                                {{ total|price }}
+                            </span>
+                            </p>
+                            {# Exemple si vous avez des frais de livraison ou autres #}
+                            {#
+                            <p class="card-text">
+                                Frais de livraison :
+                                <span class="fw-bold float-end">5,00 €</span>
+                            </p>
+                            #}
+
+                            <hr>
+                            <p class="card-text fs-5">
+                                Total :
+                                <span class="fw-bold float-end">
+                                {{ total|price }}
+                            </span>
+                            </p>
+                            <a href="#" class="btn btn-primary w-100 mt-3">
+                                Valider mon panier
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                Votre panier est vide.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
