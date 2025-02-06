@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Classe\Cart;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -19,7 +20,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/panier/add/{id}', name: 'app_cart_add')]
-    public function add(int $id, Cart $cart, ProductRepository $productRepository): Response
+    public function add(int $id, Cart $cart, ProductRepository $productRepository, Request $request): Response
     {
         // Recup produit associé au cart
         $product = $productRepository->findOneBy(['id' => $id]);
@@ -31,26 +32,10 @@ class CartController extends AbstractController
             'Article ajouté au panier !'
         );
 
-        // Rediriger
-        // plutot que 2 routes add et increment on pourrait avoir REquest de htttp foundation
-        // Pour redirger vers l'url d'avant
-        return $this->redirectToRoute('app_product', ['slug' => $product->getSlug()]);
+        // Rediriger avec Request header referer
+        return $this->redirect($request->headers->get('referer'));
     }
 
-    #[Route('/panier/increment/{id}', name: 'app_cart_increment')]
-    public function increment(int $id, Cart $cart, ProductRepository $productRepository): Response
-    {
-        $product = $productRepository->findOneBy(['id' => $id]);
-
-        $cart->add($product);
-
-        $this->addFlash(
-            'success',
-            'Article ajouté !'
-        );
-
-        return $this->redirectToRoute('app_cart');
-    }
 
     #[Route('/panier/decrement/{id}', name: 'app_cart_decrement')]
     public function decrement(int $id, Cart $cart, ProductRepository $productRepository): Response
