@@ -23,14 +23,14 @@
                 <!-- Prix -->
                 <div class="mt-4">
                     <p class="fs-5 mb-2"><strong>Prix HT :</strong>
-                        <span class="text-dark fw-semibold">{{ product.price | number_format(2, ',', ' ') }}</span> pièces d'or
+                        <span class="text-dark fw-semibold">{{ product.price | price }}</span> pièces d'or
                     </p>
                     <p class="fs-5 mb-2"><strong>TVA :</strong>
                         <span class="text-dark fw-semibold">{{ product.tva }}%</span>
                     </p>
                     <p class="fs-3 fw-bold text-success mt-2">
                         <strong>Prix TTC :</strong>
-                        {{ product.getPriceWt() | number_format(2, ',', ' ') }} pièces d'or
+                        {{ product.getPriceWt() | price }} pièces d'or
                     </p>
                 </div>
 

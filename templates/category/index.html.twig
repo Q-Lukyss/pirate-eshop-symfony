@@ -21,9 +21,7 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ product.name }}</h5>
                                 <p class="card-text text-truncate">{{ product.description|raw }}</p>
-                                <p class="card-text fw-bold">{{ product.getPriceWt() }}
-                                    Piece(s) d'Or
-                                </p>
+                                <p class="card-text fw-bold">{{ product.getPriceWt()| price }}</p>
                                 <a href="{{ path('app_product', {slug: product.slug}) }}" class="btn btn-primary mt-auto">Afficher</a>
                             </div>
                         </div>
