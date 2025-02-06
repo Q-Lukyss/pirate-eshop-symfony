@@ -38,9 +38,8 @@ class CartController extends AbstractController
     #[Route('/panier/increment/{id}', name: 'app_cart_increment')]
     public function increment(int $id, Cart $cart, ProductRepository $productRepository): Response
     {
-        // Recup produit associé au cart
         $product = $productRepository->findOneBy(['id' => $id]);
-        // Ajouter le produit
+
         $cart->add($product);
 
         $this->addFlash(
@@ -48,14 +47,12 @@ class CartController extends AbstractController
             'Article ajouté !'
         );
 
-        // Rediriger
         return $this->redirectToRoute('app_cart');
     }
 
     #[Route('/panier/decrement/{id}', name: 'app_cart_decrement')]
     public function decrement(int $id, Cart $cart, ProductRepository $productRepository): Response
     {
-        // Recup produit associé au cart
         $product = $productRepository->findOneBy(['id' => $id]);
 
         $cart->decrement_quantity($product);
@@ -65,16 +62,14 @@ class CartController extends AbstractController
             'Article Enlevé du panier !'
         );
 
-        // Rediriger
         return $this->redirectToRoute('app_cart');
     }
 
     #[Route('/panier/remove/{id}', name: 'app_cart_remove')]
     public function remove(int $id, Cart $cart, ProductRepository $productRepository): Response
     {
-        // Recup produit associé au cart
         $product = $productRepository->findOneBy(['id' => $id]);
-        // Ajouter le produit
+
         $cart->remove($product);
 
         $this->addFlash(
@@ -82,7 +77,6 @@ class CartController extends AbstractController
             'Article Supprimé'
         );
 
-        // Rediriger
         return $this->redirectToRoute('app_cart');
     }
 
@@ -96,7 +90,6 @@ class CartController extends AbstractController
             'Panier vidé'
         );
 
-        // Rediriger
         return $this->redirectToRoute('app_home');
     }
 }
