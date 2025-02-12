@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CartController extends AbstractController
 {
-    #[Route('/panier', name: 'app_cart')]
+    #[Route('/commande/panier', name: 'app_cart')]
     public function index(Cart $cart): Response
     {
         return $this->render('cart/index.html.twig', [
@@ -19,7 +19,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/panier/add/{id}', name: 'app_cart_add')]
+    #[Route('/commande/panier/add/{id}', name: 'app_cart_add')]
     public function add(int $id, Cart $cart, ProductRepository $productRepository, Request $request): Response
     {
         // Recup produit associé au cart
@@ -37,7 +37,7 @@ class CartController extends AbstractController
     }
 
 
-    #[Route('/panier/decrement/{id}', name: 'app_cart_decrement')]
+    #[Route('/commande/panier/decrement/{id}', name: 'app_cart_decrement')]
     public function decrement(int $id, Cart $cart, ProductRepository $productRepository): Response
     {
         $product = $productRepository->findOneBy(['id' => $id]);
@@ -52,7 +52,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('/panier/remove/{id}', name: 'app_cart_remove')]
+    #[Route('/commande/panier/remove/{id}', name: 'app_cart_remove')]
     public function remove(int $id, Cart $cart, ProductRepository $productRepository): Response
     {
         $product = $productRepository->findOneBy(['id' => $id]);
@@ -67,7 +67,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('/panier/clear', name: 'app_cart_clear')]
+    #[Route('/commande/panier/clear', name: 'app_cart_clear')]
     public function clear (Cart $cart): Response
     {
         $cart->clear();

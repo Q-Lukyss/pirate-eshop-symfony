@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <main class="p-2">
+        <h1 class="m-3">Vos Adresses</h1>
+        <a class="btn btn-outline-primary" href="{{ path('app_address_add') }}">Ajouter une adresse</a>
+        <div class="container my-5">
+            <div class="row">
+                {% for adresse in app.user.adresses %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ adresse.address }}</h5>
+                                <p class="card-text">
+                                    {{ adresse.city }}, {{ adresse.country }}
+                                </p>
+                                <a href="{{ path('app_address_add', {id:adresse.id}) }}">Modifier l'Adresse</a>
+                                <a class="btn-outline-danger btn" href="{{ path('app_address_delete', {id:adresse.id}) }}">Supprimer l'Adresse</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

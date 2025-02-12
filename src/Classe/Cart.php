@@ -3,6 +3,7 @@
 namespace App\Classe;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use function PHPUnit\Framework\isEmpty;
 
 class Cart
 {
@@ -88,5 +89,51 @@ class Cart
     public function clear(): void
     {
         $this->requestStack->getSession()->remove('cart');
+    }
+
+    public function getTotalQty(): float
+    {
+        $cart = $this->getCart();
+        $quantity = 0;
+        if(!isset($cart) || empty($cart)){
+            return 0;
+        }
+        foreach ($cart as $product) {
+            $quantity += $product['qty'];
+        }
+        return $quantity;
+
+    }
+    public function getTotalPriceRaw(): float
+    {
+        $cart = $this->getCart();
+        $price = 0;
+        if(!isset($cart) || empty($cart)){
+            return 0;
+        }
+        foreach ($cart as $product) {
+            $price += $product['object']->getPrice() * $product['qty'];
+        }
+        return $price;
+    }
+    public function getTotalPriceWt(): float
+    {
+        $cart = $this->getCart();
+        $price = 0;
+        if(!isset($cart) || empty($cart)){
+            return 0;
+        }
+        foreach ($cart as $product) {
+            $price += $product['object']->getPriceWt() * $product['qty'];
+        }
+        return $price;
+    }
+
+    public function checkIfCartExists():bool
+    {
+        if(!isset($cart) || empty($cart)){
+            return false;
+        }
+        return true;
     }
 }

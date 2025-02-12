@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <main class="p-2">
+        <h1 class="m-3">Nouvelle Adresse</h1>
+        <div class="m-5">
+
+        {{ form_start(address_form) }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(address_form.firstname) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(address_form.lastname) }}
+            </div>
+            <div class="col-md-12">
+                {{ form_row(address_form.address) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(address_form.city) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(address_form.country) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(address_form.phone) }}
+            </div>
+        </div>
+        <div class="container text-center">
+            {{ form_end(address_form) }}
+        </div>
+
+        </div>
+    </main>
+{% endblock %}

@@ -1,21 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier{% endblock %}
+{% block title %}Récapitulatif{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
 
-        <h1 class="mb-4">Mon panier</h1>
-
-        <a href="{{ path('app_cart_clear') }}" class="btn btn-outline-danger">Vider le panier</a>
+        <h1 class="mb-4">Récapitulatif de la Commande</h1>
 
         {% if cart is not empty %}
-            {# Calcul du total du panier #}
-            {% set total = 0 %}
-            {% for product in cart %}
-                {% set total = total + (product.object.priceWt() * product.qty) %}
-            {% endfor %}
-
             <div class="row">
                 {# Colonne de gauche : liste des produits #}
                 <div class="col-md-8">
@@ -34,15 +26,7 @@
 
                                         {# Section quantité avec boutons +/- #}
                                         <div class="d-flex align-items-center mb-2">
-                                            <a href="{{ path('app_cart_decrement', { id: product.object.id }) }}"
-                                               class="btn btn-outline-secondary btn-sm me-2">
-                                                -
-                                            </a>
                                             <span class="fw-bold">{{ product.qty }}</span>
-                                            <a href="{{ path('app_cart_add', { id: product.object.id }) }}"
-                                               class="btn btn-outline-secondary btn-sm ms-2">
-                                                +
-                                            </a>
                                         </div>
 
                                         <p class="mb-1">Prix unitaire :
@@ -51,16 +35,17 @@
                                         <p class="mb-1">Total :
                                             <strong>{{ (product.object.priceWt() * product.qty)|price }}</strong>
                                         </p>
-                                        {# Bouton pour supprimer l'article du panier #}
-                                        <a href="{{ path('app_cart_remove', { id: product.object.id }) }}"
-                                           class="btn btn-danger btn-sm mt-2">
-                                            Supprimer
-                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
+                    <div class="card mb-3">
+                        {{ choices.addresses.__toString() }}
+                    </div>
+                    <div class="card mb-3">
+                        {{ choices.carriers.__toString() }}
+                    </div>
                 </div>
 
                 {# Colonne de droite : récapitulatif du total #}
@@ -97,7 +82,7 @@
                                 {{ cartPriceWt|price }}
                             </span>
                             </p>
-                            <a href="{{ path('app_order') }}" class="btn btn-primary w-100 mt-3">
+                            <a href="{{ path('app_payment', {'id_order': order.id}) }}" class="btn btn-primary w-100 mt-3">
                                 Valider mon panier
                             </a>
                         </div>
