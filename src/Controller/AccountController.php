@@ -64,7 +64,7 @@ class AccountController extends AbstractController
 
     #[Route('/compte/adresse/ajouter/{id}', name: 'app_address_add', defaults: ['id' => null])]
     public function addAddress(Request $request, EntityManagerInterface $entityManager,
-                               int $id, AdressRepository $adressRepository): Response
+                               ?int $id, AdressRepository $adressRepository): Response
     {
         // Id existe ?
         if ($id){
